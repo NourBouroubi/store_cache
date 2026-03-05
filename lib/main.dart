@@ -27,14 +27,17 @@ const String cacheFileId = 'store_cache_v1';
 Future<dynamic> main(final context) async {
   // Validate environment
   final missingEnvs = <String>[];
-  if (endpoint == null || endpoint!.isEmpty)
+  if (endpoint == null || endpoint!.isEmpty) {
     missingEnvs.add('APPWRITE_ENDPOINT');
-  if (projectId == null || projectId!.isEmpty)
+  }
+  if (projectId == null || projectId!.isEmpty) {
     missingEnvs.add('APPWRITE_FUNCTION_PROJECT_ID');
+  }
   if (apiKey == null || apiKey!.isEmpty) missingEnvs.add('APPWRITE_API_KEY');
   if (dbId == null || dbId!.isEmpty) missingEnvs.add('DB_ID');
-  if (cacheBucketId == null || cacheBucketId!.isEmpty)
+  if (cacheBucketId == null || cacheBucketId!.isEmpty) {
     missingEnvs.add('CACHE_BUCKET_ID');
+  }
 
   if (missingEnvs.isNotEmpty) {
     context.error('❌ Missing environment variables: ${missingEnvs.join(', ')}');
@@ -77,6 +80,7 @@ Future<dynamic> main(final context) async {
               'show_dedication': doc.data['show_dedication'],
               'hidden_android': doc.data['hidden_android'] ?? false,
               'hidden_ios': doc.data['hidden_ios'] ?? false,
+              'google_play_product_id': doc.data['google_play_product_id'],
               'author': doc.data['author'] is Map
                   ? {
                       '\$id': doc.data['author']['\$id'],
